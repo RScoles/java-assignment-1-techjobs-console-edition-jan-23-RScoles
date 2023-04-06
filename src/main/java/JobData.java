@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -93,18 +90,45 @@ public class JobData {
      * @param value The search term to look for
      * @return      List of all jobs with at least one field containing the value
      */
+
+
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
         // load data, if not already loaded
         loadData();
 
         // TODO - implement this method
-        return null;
-    }
+        //To hold string keys and the values
+        ArrayList<HashMap<String, String>> someJobs = new ArrayList<>();
 
-    /**
-     * Read in data from a CSV file and store it in a list
-     */
+        //loops to go over all items in list
+        for (int i = 0; allJobs.size() > i; i++) {
+            //Gets the HashMap at i index in allJobs list
+            HashMap<String, String> rows = allJobs.get(i);
+            //loops over each entry in the rows (employer,  location etc.
+            for (Map.Entry<String, String> row : rows.entrySet()) {
+                //Grabs a item to compare to searched item
+                String aValue = row.getValue();
+                value.toLowerCase();
+                    //checks to sees if they're equal
+                    //for some reason works on all but case sensitivity doesnt work in any selections
+                if (aValue.toLowerCase().contains(value.toLowerCase())){
+                    //dont want duplicate rows
+                    if(!someJobs.contains(row)) {
+                        // add the whole row of found item
+                        someJobs.add(rows);
+                    }
+                }
+
+            }
+        }
+        //sends everything back to get printed to console
+        return someJobs;
+
+    }
+        /**
+         * Read in data from a CSV file and store it in a list
+         */
     private static void loadData() {
 
         // Only load data once

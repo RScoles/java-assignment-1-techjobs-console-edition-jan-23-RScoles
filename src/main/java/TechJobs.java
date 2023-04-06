@@ -52,7 +52,7 @@ public class TechJobs {
                     }
                 }
 
-            } else { // choice is "search"
+            } else {// choice is "search"
 
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
@@ -119,7 +119,23 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        System.out.println("printJobs is not implemented yet");
+        /* Checks to make sure ArrayList isn't empty if empty prints "No Results"
+        used print instead of println because it formats correctly to pass the test
+         */
+        if(someJobs.size() == 0) {
+            System.out.print("No Results");
+            return;
+        } else {
+            // If the ArrayList is not empty, this wil loop through each job HashMap in the ArrayList and print each field
+            for (HashMap<String, String> job : someJobs) {
+                //run println outside loop so doesn't ***** after every loop
+                System.out.println("\n*****");
+                for(String key : job.keySet()) {
+                    System.out.println(key + ": " + job.get(key));
+                }
+                System.out.println("*****");
+            }
+        }
+       // System.out.println(""printJobs is not implemented yet");
     }
 }
