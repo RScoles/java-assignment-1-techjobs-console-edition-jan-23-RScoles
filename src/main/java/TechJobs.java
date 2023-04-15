@@ -116,8 +116,6 @@ public class TechJobs {
 
         return choiceKeys[choiceIdx];
     }
-
-    // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
         /* Checks to make sure ArrayList isn't empty if empty prints "No Results"
         used print instead of println because it formats correctly to pass the test
@@ -134,8 +132,9 @@ public class TechJobs {
                     System.out.println(key + ": " + job.get(key));
                 }
                 System.out.println("*****");
+
             }
         }
-       // System.out.println(""printJobs is not implemented yet");
+        // System.out.println(""printJobs is not implemented yet");
     }
 }

@@ -75,8 +75,10 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
-
-            if (aValue.contains(value)) {
+            // added toLowercase here for case intensity
+            aValue = aValue.toLowerCase();
+            //added toLowerCase here too
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -92,41 +94,37 @@ public class JobData {
      */
 
 
-    public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        //To hold string keys and the values
+        // To hold string keys and the values
         ArrayList<HashMap<String, String>> someJobs = new ArrayList<>();
 
-        //loops to go over all items in list
+        // loops to go over all items in list
         for (int i = 0; allJobs.size() > i; i++) {
-            //Gets the HashMap at i index in allJobs list
+            // Gets the HashMap at i index in allJobs list
             HashMap<String, String> rows = allJobs.get(i);
-            //loops over each entry in the rows (employer,  location etc.
+            // loops over each entry in the rows (employer, location, etc.)
             for (Map.Entry<String, String> row : rows.entrySet()) {
-                //Grabs a item to compare to searched item
+                // Grabs an item to compare to searched item
                 String aValue = row.getValue();
-                value.toLowerCase();
-                    //checks to sees if they're equal
-                    //for some reason works on all but case sensitivity doesnt work in any selections
-                if (aValue.toLowerCase().contains(value.toLowerCase())){
-                    //dont want duplicate rows
-                    if(!someJobs.contains(row)) {
+                // Convert both values to lowercase for case-insensitive comparison
+                if (aValue.toLowerCase().contains(value.toLowerCase())) {
+                    // Don't want duplicate rows
+                    if (!someJobs.contains(rows)) {
                         // add the whole row of found item
                         someJobs.add(rows);
                     }
                 }
-
             }
         }
-        //sends everything back to get printed to console
+        // sends everything back to get printed to console
         return someJobs;
-
     }
-        /**
+
+    /**
          * Read in data from a CSV file and store it in a list
          */
     private static void loadData() {
